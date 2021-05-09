@@ -53,7 +53,7 @@ var getCityWeatherFive = function(city){
                 //return next day noon date
                 console.log(data.list[3].dt_txt)
                 //return next day noon image
-                console.log(data.list[3].weather[0].icon)
+                console.log(` http://openweathermap.org/img/wn/${data.list[3].weather[0].icon}@2x.png`)
                 //return next day noon temp
                 console.log((data.list[3].main.temp-273.15)*(9/5)+32)
                 //return next day noon wind
