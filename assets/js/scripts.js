@@ -188,26 +188,69 @@ var getCityWeatherFive = function(city){
 }
 
 var historyLog = function(city){
-
+    console.log(cityname.value);
+    if (cityname.value!==""){
     if (localStorage.getItem("CitySearch")===null){
-    localStorage.setItem("CitySearch",cityname.value.toUpperCase());
+        localStorage.setItem("CitySearch",cityname.value.toUpperCase());
     }else{
-    var citySearchHistoryLocalStorage=localStorage.getItem("CitySearch");
-    localStorage.setItem("CitySearch",citySearchHistoryLocalStorage + ", " + cityname.value.toUpperCase());
+        var citySearchHistoryLocalStorage=localStorage.getItem("CitySearch");
+        localStorage.setItem("CitySearch",citySearchHistoryLocalStorage + ", " + cityname.value.toUpperCase());
     }
 
-    var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
-    console.log(searchHistoryArr);
-    for(let i=0; i<searchHistoryArr.length; i++){
-    var historySearchButton = document.createElement("button");
-    historySearchButton.id=searchHistoryArr[i];
-    historySearchButton.textContent=searchHistoryArr[i];
-    historySearchButton.className="weatherSearchHistory";
-    historySearchButton.addEventListener("click", historySearch);
-    searchHistoryEl.appendChild(historySearchButton);
-    cityNameInputEl.value='';
-}
-}
+    if (localStorage.getItem("CitySearch")!==null){
+        var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
+        console.log(searchHistoryArr.includes(cityname.value.toUpperCase()))
+        searchHistoryEl.innerHTML=''
+
+        for (var i=0; i<searchHistoryArr.length; i++){
+            var historySearchButton = document.createElement("button");
+            historySearchButton.id=searchHistoryArr[i];
+            historySearchButton.textContent=searchHistoryArr[i];
+            historySearchButton.className="weatherSearchHistory";
+            historySearchButton.addEventListener("click", historySearch);
+            searchHistoryEl.appendChild(historySearchButton);
+        }
+    }
+    }
+
+    // if (localStorage.getItem("CitySearch")===null){
+    //     localStorage.setItem("CitySearch",cityname.value.toUpperCase());
+    //         var historySearchButton = document.createElement("button");
+    //         historySearchButton.id=cityname.value.toUpperCase();
+    //         historySearchButton.textContent=cityname.value.toUpperCase();
+    //         historySearchButton.className="weatherSearchHistory";
+    //         historySearchButton.addEventListener("click", historySearch);
+    //         searchHistoryEl.appendChild(historySearchButton);
+    //         cityNameInputEl.value='';
+    // }else{
+    //     //delete existing buttons to avoid duplicates
+    //     searchHistoryEl.innerHTML='';
+    //     weatherSearchHistoryEl.appendChild(searchHistoryEl);
+
+    //     var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
+    //     console.log(searchHistoryArr.includes(cityname.value.toUpperCase()))
+    //     if(searchHistoryArr.includes(cityname.value.toUpperCase())===false){
+    //     var citySearchHistoryLocalStorage=localStorage.getItem("CitySearch");
+    //     localStorage.setItem("CitySearch",citySearchHistoryLocalStorage + ", " + cityname.value.toUpperCase());
+
+    //     for(let i=0; i<searchHistoryArr.length+1; i++){
+    //         var historySearchButton = document.createElement("button");
+    //         historySearchButton.id=searchHistoryArr[i];
+    //         historySearchButton.textContent=searchHistoryArr[i];
+    //         historySearchButton.className="weatherSearchHistory";
+    //         historySearchButton.addEventListener("click", historySearch);
+    //         searchHistoryEl.appendChild(historySearchButton);
+    //         cityNameInputEl.value='';
+    //     }} else {
+    //         //do nothing
+    //     }
+        
+    }
+//     var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
+//     console.log(searchHistoryArr);
+
+// }
+
 
 var historySearch = function(){
     
@@ -231,3 +274,4 @@ var historySearch = function(){
 
 weatherSearchEl.addEventListener("submit", formSubmitHandler);
 weatherSearchHistoryEl.addEventListener("submit", historySearch);
+window.onload = historyLog();
