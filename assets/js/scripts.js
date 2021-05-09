@@ -37,9 +37,12 @@ var fiveDayTempEl = document.getElementById("fiveDayTemp");
 var fiveDayWindEl = document.getElementById("fiveDayWind");
 var fiveDayHumidity = document.getElementById("fiveDayHumidity");
 
+var newExistingCheck = '';
+
 var formSubmitHandler = function(event){
     event.preventDefault();
     var cityname = cityNameInputEl.value.trim();
+    newExistingCheck="New";
     
 
     if(cityname){
@@ -106,7 +109,7 @@ var getCityWeatherFive = function(city){
                 nextDayWindEl.innerHTML="Wind: "+data.list[3].wind.speed.toFixed(0)+"MPH";
                 //return next day noon humidity
                 console.log(data.list[3].main.humidity);
-                nextDayHumidity.innerHTML="Humidity: "+data.list[3].main.humidity;
+                nextDayHumidity.innerHTML="Humidity: "+data.list[3].main.humidity+"%";
 
                 //return two day out noon date
                 console.log(data.list[11].dt_txt);
@@ -122,7 +125,7 @@ var getCityWeatherFive = function(city){
                 twoDayWindEl.innerHTML="Wind: "+data.list[11].wind.speed.toFixed(0)+"MPH";
                 //return two day out noon humidity
                 console.log(data.list[11].main.humidity);
-                twoDayHumidity.innerHTML="Humidity: "+data.list[11].main.humidity;
+                twoDayHumidity.innerHTML="Humidity: "+data.list[11].main.humidity+"%";
 
                 //return three day out noon date
                 console.log(data.list[19].dt_txt);
@@ -138,7 +141,7 @@ var getCityWeatherFive = function(city){
                 threeDayWindEl.innerHTML="Wind: "+data.list[19].wind.speed.toFixed(0)+"MPH";
                 //return three day out noon humidity
                 console.log(data.list[19].main.humidity);
-                threeDayHumidity.innerHTML="Humidity: "+data.list[19].main.humidity;
+                threeDayHumidity.innerHTML="Humidity: "+data.list[19].main.humidity+"%";
 
                 //return four day out noon date
                 console.log(data.list[27].dt_txt);
@@ -154,7 +157,7 @@ var getCityWeatherFive = function(city){
                 fourDayWindEl.innerHTML="Wind: "+data.list[27].wind.speed.toFixed(0)+"MPH";
                 //return four day out noon humidity
                 console.log(data.list[27].main.humidity);
-                fourDayHumidity.innerHTML="Humidity: "+data.list[27].main.humidity;
+                fourDayHumidity.innerHTML="Humidity: "+data.list[27].main.humidity+"%";
 
                 //return five day out noon date
                 console.log(data.list[35].dt_txt)
@@ -170,9 +173,13 @@ var getCityWeatherFive = function(city){
                 fiveDayWindEl.innerHTML="Wind: "+data.list[35].wind.speed.toFixed(0)+"MPH";
                 //return five day out noon humidity
                 console.log(data.list[35].main.humidity)
-                fiveDayHumidity.innerHTML="Humidity: "+data.list[35].main.humidity
+                fiveDayHumidity.innerHTML="Humidity: "+data.list[35].main.humidity+"%";
 
+                console.log(newExistingCheck);
+                if (newExistingCheck==="New"){
                 historyLog();
+                }
+                newExistingCheck='';
             })
         }else{
             alert("error: "+ response.statusText);
@@ -181,12 +188,25 @@ var getCityWeatherFive = function(city){
 }
 
 var historyLog = function(city){
-var historySearchButton = document.createElement("button");
-historySearchButton.id=cityname.value;
-historySearchButton.textContent=cityname.value.toUpperCase();
-historySearchButton.className="weatherSearchHistory";
-historySearchButton.addEventListener("click", historySearch);
-searchHistoryEl.appendChild(historySearchButton);
+
+    if (localStorage.getItem("CitySearch")===null){
+    localStorage.setItem("CitySearch",cityname.value.toUpperCase());
+    }else{
+    var citySearchHistoryLocalStorage=localStorage.getItem("CitySearch");
+    localStorage.setItem("CitySearch",citySearchHistoryLocalStorage + ", " + cityname.value.toUpperCase());
+    }
+
+    var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
+    console.log(searchHistoryArr);
+    for(let i=0; i<searchHistoryArr.length; i++){
+    var historySearchButton = document.createElement("button");
+    historySearchButton.id=searchHistoryArr[i];
+    historySearchButton.textContent=searchHistoryArr[i];
+    historySearchButton.className="weatherSearchHistory";
+    historySearchButton.addEventListener("click", historySearch);
+    searchHistoryEl.appendChild(historySearchButton);
+    cityNameInputEl.value='';
+}
 }
 
 var historySearch = function(){
@@ -194,8 +214,10 @@ var historySearch = function(){
     event.preventDefault();
     console.log(this.id);
     
+    
     var cityname = this.id;
     console.log(cityname);
+    cityNameInputEl.textContent=cityname
     
 
     if(cityname){
