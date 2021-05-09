@@ -43,8 +43,7 @@ var formSubmitHandler = function(event){
     
 
     if(cityname){
-        //getCityWeather(cityname);
-        //cityNameInputEl.value="";
+        getCityWeather(cityname);
         getCityWeatherFive(cityname);
         
     } else {
@@ -184,20 +183,23 @@ var getCityWeatherFive = function(city){
 var historyLog = function(city){
 var historySearchButton = document.createElement("button");
 historySearchButton.id=cityname.value;
-historySearchButton.textContent=cityname.value;
+historySearchButton.textContent=cityname.value.toUpperCase();
 historySearchButton.className="weatherSearchHistory";
+historySearchButton.addEventListener("click", historySearch);
 searchHistoryEl.appendChild(historySearchButton);
 }
 
 var historySearch = function(){
+    
     event.preventDefault();
+    console.log(this.id);
+    
     var cityname = this.id;
-    console.log(cityname)
+    console.log(cityname);
     
 
     if(cityname){
-        //getCityWeather(cityname);
-        //cityNameInputEl.value="";
+        getCityWeather(cityname);
         getCityWeatherFive(cityname);
         
     } else {
