@@ -11,6 +11,7 @@
       integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="assets/cs/styles.css" />
     <title>Weather</title>
   </head>
   <body>
@@ -42,24 +43,85 @@
               <div class="d-grid gap-2">
                 <button type="submit" class="btn bg-secondary">Search</button>
               </div>
-              <hr style="height:3px;">
+              <hr style="height: 3px" />
             </form>
             <div class="row">
-                <div class="container">
-                    <p>Output for search history</p>
-                    <p>Button Creation Required</p>
+              <div id="weatherSearchHistory" class="card-body">
+                <div class="container" id="search-history">
                 </div>
+            </div>
             </div>
           </div>
         </div>
         <!-- Start of column 2 -->
         <div class="col align-self-start col-12 col-md-9 mt-4">
-            <div class="row">
-                <p>API Output for current day forecast</p>
+          <div class="row">
+            <div class="currentForecast container border">
+              <p id="weatherCity"></p>
+              <p id="currentTemp"></p>
+              <p id="currentWind"></p>
+              <p id="currentHumdity"></p>
             </div>
-            <div class = "row">
-                <p>API Output for 5 day forecast</p>
+          </div>
+          <!-- Start of 5 Day Forecast -->
+          <div class="row">
+            <p class="fw-bold fs-6">5-Day Forecast:</p>
+            <div class="col-md-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title" id="nextDayDate"></p>
+                  <img src="#" id="nextDayImg" />
+                  <p class="card-text" id="nextDayTemp">Temp:</p>
+                  <p class="card-text" id="nextDayWind">Wind:</p>
+                  <p class="card-text" id="nextDayHumidity">Humidity:</p>
+                </div>
+              </div>
             </div>
+            <div class="col-md-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title" id="twoDayDate"></p>
+                  <img src="#" id="twoDayImg" />
+                  <p class="card-text" id="twoDayTemp">Temp:</p>
+                  <p class="card-text" id="twoDayWind">Wind:</p>
+                  <p class="card-text" id="twoDayHumidity">Humidity:</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title" id="threeDayDate"></p>
+                  <img src="#" id="threeDayImg" />
+                  <p class="card-text" id="threeDayTemp">Temp:</p>
+                  <p class="card-text" id="threeDayWind">Wind:</p>
+                  <p class="card-text" id="threeDayHumidity">Humidity:</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title" id="fourDayDate"></p>
+                  <img src="#" id="fourDayImg" />
+                  <p class="card-text" id="fourDayTemp">Temp:</p>
+                  <p class="card-text" id="fourDayWind">Wind:</p>
+                  <p class="card-text" id="fourDayHumidity">Humidity:</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title" id="fiveDayDate"></p>
+                  <img src="#" id="fiveDayImg" />
+                  <p class="card-text" id="fiveDayTemp">Temp:</p>
+                  <p class="card-text" id="fiveDayWind">Wind:</p>
+                  <p class="card-text" id="fiveDayHumidity">Humidity:</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
