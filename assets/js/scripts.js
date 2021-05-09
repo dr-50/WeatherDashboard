@@ -106,7 +106,7 @@ var getCityWeatherFive = function(city){
                 nextDayTempEl.innerHTML="Temp: "+((data.list[3].main.temp-273.15)*(9/5)+32).toFixed(0) + "*F";
                 //return next day noon wind
                 console.log(data.list[3].wind.speed);
-                nextDayWindEl.innerHTML="Wind: "+data.list[3].wind.speed.toFixed(0)+"MPH";
+                nextDayWindEl.innerHTML="Wind: "+data.list[3].wind.speed.toFixed(0)+" MPH";
                 //return next day noon humidity
                 console.log(data.list[3].main.humidity);
                 nextDayHumidity.innerHTML="Humidity: "+data.list[3].main.humidity+"%";
@@ -122,7 +122,7 @@ var getCityWeatherFive = function(city){
                 twoDayTempEl.innerHTML="Temp: "+((data.list[11].main.temp-273.15)*(9/5)+32).toFixed(0) + "*F";
                 //return two day out noon wind
                 console.log(data.list[11].wind.speed);
-                twoDayWindEl.innerHTML="Wind: "+data.list[11].wind.speed.toFixed(0)+"MPH";
+                twoDayWindEl.innerHTML="Wind: "+data.list[11].wind.speed.toFixed(0)+" MPH";
                 //return two day out noon humidity
                 console.log(data.list[11].main.humidity);
                 twoDayHumidity.innerHTML="Humidity: "+data.list[11].main.humidity+"%";
@@ -138,7 +138,7 @@ var getCityWeatherFive = function(city){
                 threeDayTempEl.innerHTML="Temp: "+((data.list[19].main.temp-273.15)*(9/5)+32).toFixed(0) + "*F";
                 //return three day out noon wind
                 console.log(data.list[19].wind.speed);
-                threeDayWindEl.innerHTML="Wind: "+data.list[19].wind.speed.toFixed(0)+"MPH";
+                threeDayWindEl.innerHTML="Wind: "+data.list[19].wind.speed.toFixed(0)+" MPH";
                 //return three day out noon humidity
                 console.log(data.list[19].main.humidity);
                 threeDayHumidity.innerHTML="Humidity: "+data.list[19].main.humidity+"%";
@@ -154,7 +154,7 @@ var getCityWeatherFive = function(city){
                 fourDayTempEl.innerHTML="Temp: "+((data.list[27].main.temp-273.15)*(9/5)+32).toFixed(0) + "*F";
                 //return four day out noon wind
                 console.log(data.list[27].wind.speed);
-                fourDayWindEl.innerHTML="Wind: "+data.list[27].wind.speed.toFixed(0)+"MPH";
+                fourDayWindEl.innerHTML="Wind: "+data.list[27].wind.speed.toFixed(0)+" MPH";
                 //return four day out noon humidity
                 console.log(data.list[27].main.humidity);
                 fourDayHumidity.innerHTML="Humidity: "+data.list[27].main.humidity+"%";
@@ -170,14 +170,14 @@ var getCityWeatherFive = function(city){
                 fiveDayTempEl.innerHTML="Temp: "+((data.list[35].main.temp-273.15)*(9/5)+32).toFixed(0) + "*F";
                 //return five day out noon wind
                 console.log(data.list[35].wind.speed)
-                fiveDayWindEl.innerHTML="Wind: "+data.list[35].wind.speed.toFixed(0)+"MPH";
+                fiveDayWindEl.innerHTML="Wind: "+data.list[35].wind.speed.toFixed(0)+" MPH";
                 //return five day out noon humidity
                 console.log(data.list[35].main.humidity)
                 fiveDayHumidity.innerHTML="Humidity: "+data.list[35].main.humidity+"%";
 
                 console.log(newExistingCheck);
                 if (newExistingCheck==="New"){
-                historyLog();
+                historyLogSearch();
                 }
                 newExistingCheck='';
             })
@@ -187,70 +187,39 @@ var getCityWeatherFive = function(city){
     })
 }
 
-var historyLog = function(city){
-    console.log(cityname.value);
-    if (cityname.value!==""){
+var historyLogPageLoad = function(city){
+    //page refresh/reload
+    searchHistoryEl.innerHTML='';
+    var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
+    for (var i=0; i<searchHistoryArr.length; i++){
+        var historySearchButton = document.createElement("button");
+        historySearchButton.id=searchHistoryArr[i];
+        historySearchButton.textContent=searchHistoryArr[i];
+        historySearchButton.className="weatherSearchHistory";
+        historySearchButton.addEventListener("click", historySearch);
+        searchHistoryEl.appendChild(historySearchButton);
+    }
+}
+
+var historyLogSearch = function(city){
+    
+    
+
+    //checks if anything in local storage
     if (localStorage.getItem("CitySearch")===null){
-        localStorage.setItem("CitySearch",cityname.value.toUpperCase());
+    console.log(cityname.value);
+    localStorage.setItem("CitySearch",cityname.value.toUpperCase());
     }else{
+        var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
+        //confirms input isn't in local storage
+        console.log(searchHistoryArr.includes(cityname.value.toUpperCase()))
+        if (searchHistoryArr.includes(cityname.value.toUpperCase())===false){
         var citySearchHistoryLocalStorage=localStorage.getItem("CitySearch");
         localStorage.setItem("CitySearch",citySearchHistoryLocalStorage + ", " + cityname.value.toUpperCase());
     }
-
-    if (localStorage.getItem("CitySearch")!==null){
-        var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
-        console.log(searchHistoryArr.includes(cityname.value.toUpperCase()))
-        searchHistoryEl.innerHTML=''
-
-        for (var i=0; i<searchHistoryArr.length; i++){
-            var historySearchButton = document.createElement("button");
-            historySearchButton.id=searchHistoryArr[i];
-            historySearchButton.textContent=searchHistoryArr[i];
-            historySearchButton.className="weatherSearchHistory";
-            historySearchButton.addEventListener("click", historySearch);
-            searchHistoryEl.appendChild(historySearchButton);
-        }
-    }
-    }
-
-    // if (localStorage.getItem("CitySearch")===null){
-    //     localStorage.setItem("CitySearch",cityname.value.toUpperCase());
-    //         var historySearchButton = document.createElement("button");
-    //         historySearchButton.id=cityname.value.toUpperCase();
-    //         historySearchButton.textContent=cityname.value.toUpperCase();
-    //         historySearchButton.className="weatherSearchHistory";
-    //         historySearchButton.addEventListener("click", historySearch);
-    //         searchHistoryEl.appendChild(historySearchButton);
-    //         cityNameInputEl.value='';
-    // }else{
-    //     //delete existing buttons to avoid duplicates
-    //     searchHistoryEl.innerHTML='';
-    //     weatherSearchHistoryEl.appendChild(searchHistoryEl);
-
-    //     var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
-    //     console.log(searchHistoryArr.includes(cityname.value.toUpperCase()))
-    //     if(searchHistoryArr.includes(cityname.value.toUpperCase())===false){
-    //     var citySearchHistoryLocalStorage=localStorage.getItem("CitySearch");
-    //     localStorage.setItem("CitySearch",citySearchHistoryLocalStorage + ", " + cityname.value.toUpperCase());
-
-    //     for(let i=0; i<searchHistoryArr.length+1; i++){
-    //         var historySearchButton = document.createElement("button");
-    //         historySearchButton.id=searchHistoryArr[i];
-    //         historySearchButton.textContent=searchHistoryArr[i];
-    //         historySearchButton.className="weatherSearchHistory";
-    //         historySearchButton.addEventListener("click", historySearch);
-    //         searchHistoryEl.appendChild(historySearchButton);
-    //         cityNameInputEl.value='';
-    //     }} else {
-    //         //do nothing
-    //     }
-        
-    }
-//     var searchHistoryArr = localStorage.getItem("CitySearch").split(", ");
-//     console.log(searchHistoryArr);
-
-// }
-
+}
+historyLogPageLoad();
+}
 
 var historySearch = function(){
     
@@ -274,4 +243,4 @@ var historySearch = function(){
 
 weatherSearchEl.addEventListener("submit", formSubmitHandler);
 weatherSearchHistoryEl.addEventListener("submit", historySearch);
-window.onload = historyLog();
+window.onload = historyLogPageLoad();
