@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+      crossorigin="anonymous"
+    />
+    <title>Weather</title>
+  </head>
+  <body>
+    <!-- Start of Weather Heading Bar -->
+    <nav class="navbar navbar=expand-lg navbar-light">
+      <div class="container-fluid position-absolute bg-primary bg-gradient">
+        <a class="navbar-brand mx-auto mt-3 fw-bold">Weather Dashboard</a>
+      </div>
+    </nav>
+
+    <div class="container pt-3">
+      <div class="row">
+        <div class="col align-self-start col-12 col-md-3">
+          <div class="row">
+            <p class="fw-bold fs-4 mb-0">Search for a City:</p>
+          </div>
+          <div class="row">
+            <form id="weatherSearch" class="card-body">
+              <div class="d-grid gap-2">
+                <input
+                  name="username"
+                  id="username"
+                  type="text"
+                  autofocus="true"
+                  class="form-input mb-2"
+                  placeholder="City"
+                />
+              </div>
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn bg-secondary">Search</button>
+              </div>
+              <hr style="height:3px;">
+            </form>
+          </div>
+        </div>
+        <!-- Start of column 2 -->
+        <div class="col align-self-center col-12 col-md-9">
+            <div class="row">
+                <p>API Output for current day forecast</p>
+            </div>
+            <div class = "row">
+                <p>API Output for 5 day forecast</p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/scripts.js"></script>
+  </body>
+</html>
