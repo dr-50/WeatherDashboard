@@ -14,13 +14,20 @@ var formSubmitHandler = function(event){
 }
 
 var getCityWeather = function(city) {
-    var apiUrl = `https:....`;
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f70bac3dc5426bfdb76e72707800686a`;
 
     //make a request to the url
-    fetch(apiUrl).then(function(response){
-        response.json().then(function(data){
-            console.log(data);
-        })
+    fetch(apiUrl)
+    .then(function(response){
+        if(response.ok){
+            console.log(response);
+            response.json().then(function(data){
+                console.log(data);
+            })
+        }else{
+            alert("error: "+ response.statusText);
+        }
     })
 }
+
 weatherSearchEl.addEventListener("submit", formSubmitHandler);
