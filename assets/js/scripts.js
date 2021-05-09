@@ -6,8 +6,8 @@ var formSubmitHandler = function(event){
     var cityname = cityNameInputEl.value.trim();
 
     if(cityname){
-        //getCityWeather(cityname);
-        //cityNameInputEl.value="";
+        getCityWeather(cityname);
+        cityNameInputEl.value="";
         getCityWeatherFive(cityname);
     } else {
         alert("Please enter a city");
@@ -50,7 +50,6 @@ var getCityWeatherFive = function(city){
         if(response.ok){
             console.log(response);
             response.json().then(function(data){
-                console.log(data);
                 //return next day noon date
                 console.log(data.list[3].dt_txt)
                 //return next day noon image
@@ -61,6 +60,50 @@ var getCityWeatherFive = function(city){
                 console.log(data.list[3].wind.speed)
                 //return next day noon humidity
                 console.log(data.list[3].main.humidity)
+
+                //return two day out noon date
+                console.log(data.list[11].dt_txt)
+                //return two day out noon image
+                console.log(data.list[11].weather[0].icon)
+                //return two day out noon temp
+                console.log((data.list[11].main.temp-273.15)*(9/5)+32)
+                //return two day out noon wind
+                console.log(data.list[11].wind.speed)
+                //return two day out noon humidity
+                console.log(data.list[11].main.humidity)
+
+                //return three day out noon date
+                console.log(data.list[19].dt_txt)
+                //return three day out noon image
+                console.log(data.list[19].weather[0].icon)
+                //return three day out noon temp
+                console.log((data.list[19].main.temp-273.15)*(9/5)+32)
+                //return three day out noon wind
+                console.log(data.list[19].wind.speed)
+                //return three day out noon humidity
+                console.log(data.list[19].main.humidity)
+
+                //return four day out noon date
+                console.log(data.list[27].dt_txt)
+                //return four day out noon image
+                console.log(data.list[27].weather[0].icon)
+                //return four day out noon temp
+                console.log((data.list[27].main.temp-273.15)*(9/5)+32)
+                //return four day out noon wind
+                console.log(data.list[27].wind.speed)
+                //return four day out noon humidity
+                console.log(data.list[27].main.humidity)
+
+                //return five day out noon date
+                console.log(data.list[35].dt_txt)
+                //return five day out noon image
+                console.log(data.list[35].weather[0].icon)
+                //return five day out noon temp
+                console.log((data.list[35].main.temp-273.15)*(9/5)+32)
+                //return five day out noon wind
+                console.log(data.list[35].wind.speed)
+                //return five day out noon humidity
+                console.log(data.list[35].main.humidity)
             })
         }else{
             alert("error: "+ response.statusText);
