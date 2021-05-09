@@ -1,0 +1,11 @@
+.card-text{
+    font-size: smaller;
+    color: white;
+}
+.card-title{
+    font-size:small;
+    color: white;
+}
+.card{
+    background-color: teal;
+}
